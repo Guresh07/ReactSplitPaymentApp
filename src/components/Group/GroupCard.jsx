@@ -1,0 +1,47 @@
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { saveData } from '../../utils/storage';
+import { totalBalance } from '../../utils/calculator';
+
+function GroupCard({ groupName, groupMembers, groupId, totalAmount, DeleteGroup, currentUser }) {
+  
+  const youOwed = totalBalance(groupMembers, currentUser)
+  const amountOwed = youOwed ? parseFloat(youOwed).toFixed(2) : "0.00";
+  const amountText = amountOwed >= 0 ? `owes you $${amountOwed}` : `you owe $${amountOwed}`;
+  const colorClass = amountOwed >= 0 ? "text-success" : "text-danger";
+
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    navigate(`/expenses/${groupId}`);
+    saveData("selectedGroupId", groupId);
+  };
+
+  return (
+    <div className="col-sm-12 col-lg-6 pb-2 d-flex justify-content-center align-items-center">
+      <div
+        className="groupCard shadow-sm px-3 py-2 rounded bg-white col-11 d-flex justify-content-between align-items-center"
+        onClick={handleCardClick}
+        style={{ cursor: "pointer" }}
+      >        <div className="groupDetails row-gap-1 d-flex flex-column justify-content-center align-items-start">
+          <h6 className="m-0">{groupName}</h6>
+          <p className="m-0 fw-semibold" style={{ fontSize: '0.7rem' }}>{groupMembers.length} members</p>
+          <p className="m-0 fw-semibold text-secondary" style={{ fontSize: '0.7rem' }}>Created by: {groupMembers[0].name}</p>
+          {amountOwed == 0 && totalAmount >= 0 ? (
+            <p className="m-0 fw-semibold  px-2 py-1 rounded-pill" style={{ fontSize: '0.8rem', backgroundColor: 'rgb(201 255 211)', color: 'darkgreen' }}>{ amountOwed == 0 && totalAmount == 0 ? "No Expenses Yet" : "settled" }</p>
+          ) : (
+            <p className={`fw-semibold m-0 ${colorClass}`} style={{ fontSize: '0.8rem' }}>{amountText}</p>
+          )}
+        </div>
+        <div className="totalAmmount d-flex flex-column justify-content-center align-items-end">
+          <p className="m-0 fw-semibold" style={{ fontSize: '0.8rem' }}>${totalAmount} total</p>
+          <button className="btn btn-danger delete-group-btn " style={{ fontSize: '0.5rem' }} onClick={(e) => {
+            e.stopPropagation(); // prevent triggering card click navigation
+            DeleteGroup(groupId);
+          }}>Delete Group</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default GroupCard;
