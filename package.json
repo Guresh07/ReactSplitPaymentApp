@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Guresh07/ReactSplitPaymentApp",
+  "homepage": "https://Guresh07.github.io/ReactSplitPaymentApp",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
