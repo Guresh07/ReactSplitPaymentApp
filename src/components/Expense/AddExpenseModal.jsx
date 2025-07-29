@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function AddExpenseModal({ onAddExpense, membersData }) {
-  const [description, setDescription] = useState("");
+  const [name, setname] = useState("");
   const [amount, setAmount] = useState("");
   const [paidBy, setPaidBy] = useState("");
   const [category, setCategory] = useState("🍽️ Food");
@@ -37,7 +37,7 @@ function AddExpenseModal({ onAddExpense, membersData }) {
     }
 
     const newExpense = {
-      description,
+      name,
       amount: parseFloat(amount),
       paidBy,
       category,
@@ -48,13 +48,23 @@ function AddExpenseModal({ onAddExpense, membersData }) {
     onAddExpense(newExpense);
 
     // Reset form
-    setDescription("");
+    setname("");
     setAmount("");
     setPaidBy("");
     setCategory("🍽️ Food");
     setSplitType("Equal");
     setCustomSplits({});
   };
+
+  useEffect(() => {
+    if (splitType === "Custom") {
+      const initialSplits = {};
+      membersData.forEach((member) => {
+        initialSplits[member.name] = 0;
+      });
+      setCustomSplits(initialSplits);
+    }
+  }, [splitType, membersData]);
 
   return (
     <div className="modal fade" id="addExpenseModal" tabIndex={-1}>
@@ -67,7 +77,7 @@ function AddExpenseModal({ onAddExpense, membersData }) {
             </div>
 
             <div className="modal-body">
-              <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Expense description" className="form-control mb-2" required />
+              <input type="text" value={name} onChange={(e) => setname(e.target.value)} placeholder="Expense name" className="form-control mb-2" required />
 
               <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="₹ 0.00" className="form-control mb-2" required />
 

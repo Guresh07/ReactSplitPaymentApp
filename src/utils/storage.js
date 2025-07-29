@@ -7,11 +7,11 @@ export const getData = (key) => {
 };
 
 
-const user ={
-  userData:{
-    userName:"Tyrion21",
-    email:"Tyrion21@gmail.com"
-  }
-}
+// const user ={
+//   userData:{
+//     userName:"Tyrion21",
+//     email:"Tyrion21@gmail.com"
+//   }
+// }
 
-localStorage.setItem("currentUser",JSON.stringify(user)||[])
+// localStorage.setItem("currentUser",JSON.stringify(user)||[])

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 
 
@@ -33,20 +34,18 @@ function AddPaymentRecordModal({ onAddPayment, members, currentUser, selectedPay
     setTo("")
     setAmount("")
     setNote("")
-
-
-   
-      if (selectedPayee) {
-        setTo(selectedPayee);
-      }
-      if (selectedAmount) {
-        setAmount(selectedAmount);
-      }
-
-
     // // Close modal programmatically
     // document.querySelector("#recordPaymentModal .btn-close").click()
+
+    toast.success("Payment recorded successfully!");
   }
+  useEffect(() => {
+    if (selectedPayee) setTo(selectedPayee);
+    else setTo("");
+
+    if (selectedAmount) setAmount(selectedAmount);
+    else setAmount("");
+  }, [selectedPayee, selectedAmount]);
 
   return (
     <div className="modal fade" id="recordPaymentModal" tabIndex={-1}>

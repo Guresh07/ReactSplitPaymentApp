@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { saveData } from '../../utils/storage';
 import { totalBalance } from '../../utils/calculator';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { FaTrash } from 'react-icons/fa';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -30,7 +29,7 @@ function GroupCard({ groupName, groupMembers, groupId, totalAmount, DeleteGroup,
 
   const handleConfirmDelete = () => {
     setShowModal(false);
-    toast.success("Group deleted successfully!", { position: "top-center", autoClose:1500});
+    toast.success("Group deleted successfully!");
     setTimeout(() => DeleteGroup(selectedGroupId),1500)
     
   };
@@ -39,7 +38,6 @@ function GroupCard({ groupName, groupMembers, groupId, totalAmount, DeleteGroup,
     <>
 
       <div className="col-sm-12 col-lg-6 pb-2 d-flex justify-content-center align-items-center">
-      <ToastContainer />
         <div
           className="groupCard shadow-sm px-3 py-2 rounded bg-white col-11 d-flex justify-content-between align-items-center"
           onClick={handleCardClick}

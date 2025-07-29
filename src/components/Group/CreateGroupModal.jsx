@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getData } from "../../utils/storage";
+import { useNavigate } from "react-router";
 
 
 function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
@@ -14,6 +15,7 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
     { name: "", email: "" },
   ]);
 
+  const navigate = useNavigate(); 
   const handleAddMember = () => {
     setMembers([...members, { name: "", email: "" }]);
   };
@@ -63,8 +65,13 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
 
 
 
-    onCreateGroup(newGroup);    // await it here!
-    // onCreateGroupFooter(newGroup) ? window.location.href("/groups"):""
+       // ✅ Call correct function
+    if (onCreateGroupFooter) {
+      await onCreateGroupFooter(newGroup);  // ← this will trigger API call and refresh groups
+      navigate("/");                        // ✅ Redirect to home
+    } else if (onCreateGroup) {
+      await onCreateGroup(newGroup);        // for inline usage
+    }
 
 
     setGroupName("");
@@ -75,6 +82,8 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
       { name: "", email: "" },
       { name: "", email: "" },
     ]);
+
+
 
 
   };

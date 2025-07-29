@@ -44,7 +44,9 @@ export const totalBalance = (members, currentUserName) => {
 
   members.forEach(member => {
     if (member.name !== currentUserName) {
-      total += member.balanceAmount
+      if(member.balanceAmount >= 0){
+        total += member.balanceAmount
+      }
     }
   })
   return total

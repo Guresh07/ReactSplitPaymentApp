@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 
 const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
   return (
@@ -19,6 +20,7 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                 style={{ fontSize: "0.8rem" }}
                 data-bs-toggle="modal"
                 data-bs-target="#recordPaymentModal"
+                onClick={() => onPayClick("", "")}
               >
                 <i className="fa-solid fa-money-bill-wave"></i> Record Payment
               </button>
@@ -69,8 +71,11 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                           Pay
                         </span>
                       ) : member.balanceAmount == 0 ? "" : (
-                        <i className="fa-solid fa-bell text-primary"></i>
-                      )}
+                        <i
+                          className="fa-solid fa-bell text-primary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => toast.info(`Reminder sent to ${member.email}`)}
+                        ></i>)}
                   </div>
                 </div>
                 <hr />

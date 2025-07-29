@@ -22,7 +22,7 @@ function RecentActivity({ groups }) {
   const activities = [
     ...groups.map(group => ({
       type: 'group',
-      date: new Date(group.date).getTime(), // fallback if missing
+      date: group.date, // fallback if missing
       data: group,
     })),
     ...expenses.map(expense => ({
@@ -70,7 +70,7 @@ const getGroupName = (paymentId) => {
               {activity.type === 'expense' && (
                 <>
                   <p className="m-0 fw-medium" style={{ fontSize: '0.9rem' }}>
-                    {activity.data.paidBy} paid ₹{activity.data.amount} for "{activity.data.description}"
+                    {activity.data.paidBy} paid ₹{activity.data.amount} for "{activity.data.description || activity.data.name}"
                   </p>
                   <p className="m-0 fw-semibold text-secondary" style={{ fontSize: '0.8rem' }}>
                     {new Date(activity.date).toLocaleDateString('en-US', {

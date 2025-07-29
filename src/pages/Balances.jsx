@@ -10,6 +10,8 @@ import axios from "axios";
 import BalanceList from "../components/Balance/BalanceList";
 import { getData } from "../utils/storage";
 import { payment } from "../utils/calculator";
+import { getGroups, updategroup } from "../components/Apis/Api";
+import { ToastContainer } from "react-toastify";
 
 const Balances = () => {
   const { groupId } = useParams();
@@ -24,7 +26,7 @@ const Balances = () => {
 
   const fetchGroup = async () => {
     try {
-      const response = await axios.get(`https://6866093989803950dbb10192.mockapi.io/api/groups/${groupId}`);
+      const response = await axios.get(`${getGroups}/${groupId}`);
       setGroup(response.data);
       setMembers(response.data.groupMembers);
       console.log(response.data)
@@ -56,7 +58,7 @@ const Balances = () => {
       // Add new payment to the group's payments array
       group.payments.push(newPaymentData);
 
-      await axios.put(`https://6866093989803950dbb10192.mockapi.io/api/groups/${groupId}`, group)
+      await axios.put(`${updategroup}/${groupId}`, group)
 
       // Refresh state
       fetchGroup()
@@ -79,39 +81,39 @@ const Balances = () => {
   console.log(group)
 
   if (loading) return <div className="text-center mt-5 vh-100 d-flex align-items-center justify-content-center"><div className="spinner-border text-primary" role="status"></div></div>;
-  
+
   return (
 
     <>
-        <div className="container position-relative">
-          <Header />
+      <div className="container position-relative">
 
-          <div
-            className="px-4 py-3 rounded"
-            style={{ backgroundColor: "#f0f8ff", marginBottom: "100px" }}
-          >
+        <Header />
 
-            {/* Balance Overview Title */}
-            <div className="balanceOverviewTitle">
-              <h4 className="fw-bold fs-5 px-0">Balance Overview</h4>
-            </div>
+        <section
+          className="px-4 py-3 rounded"
+          style={{ backgroundColor: "#f0f8ff", marginBottom: "100px" }}
+        >
 
-            <BalanceSummary members={members} currentUser={currentUser.userData.userName} />
-
-            <AddPaymentRecordModal onAddPayment={addPayment} members={members} currentUser={currentUser.userData.userName} selectedPayee={selectedPayee} selectedAmount={selectedAmount} />
-
-            <MembersBalanceDetails members={members} currentUser={currentUser.userData.userName} onPayClick={handlePayClick} />
-
-
-            <BalanceList payments={Balances} groupName={group.groupName} />
-
-
+          {/* Balance Overview Title */}
+          <div className="balanceOverviewTitle">
+            <h4 className="fw-bold fs-5 px-0">Balance Overview</h4>
           </div>
 
-          <Footer />
-        </div>
+          <BalanceSummary members={members} currentUser={currentUser.userData.userName} />
+
+          <AddPaymentRecordModal onAddPayment={addPayment} members={members} currentUser={currentUser.userData.userName} selectedPayee={selectedPayee} selectedAmount={selectedAmount} />
+
+          <MembersBalanceDetails members={members} currentUser={currentUser.userData.userName} onPayClick={handlePayClick} />
+
+
+          <BalanceList payments={Balances} groupName={group.groupName} />
+
+        </section>
+
+        <Footer />
+      </div>
     </>
-    
+
   );
 };
 

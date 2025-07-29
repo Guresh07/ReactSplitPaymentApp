@@ -51,7 +51,7 @@ const BalanceList = ({ payments, groupName }) => {
                         className="m-0 fw-bold"
                         style={{ fontSize: "0.9rem" }}
                       >
-                        {"$"+payment.amount.toFixed(2)}
+                        {"₹"+payment.amount.toFixed(2)}
                       </p>
                     </div>
                   </div>

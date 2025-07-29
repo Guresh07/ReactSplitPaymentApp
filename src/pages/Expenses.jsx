@@ -150,7 +150,7 @@ const Expenses = () => {
   return (
     <div className="container position-relative">
       <Header />
-      <div
+      <section
         className="px-4 py-3 rounded"
         style={{ backgroundColor: "#f0f8ff", marginBottom: "100px" }}
       >
@@ -241,7 +241,7 @@ const Expenses = () => {
           <ExpenseList expenses={expenses} />
         </div>
 
-      </div>
+      </section>
       <Footer />
     </div>
   );

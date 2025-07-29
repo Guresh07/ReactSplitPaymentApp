@@ -14,7 +14,7 @@ const ExpenseList = ({ expenses }) => {
                     className="m-0 fw-medium"
                   // style={{ fontSize: "0.9rem" }}
                   >
-                    {expense.description}
+                    {expense.name || expense.description}
                   </p>
                   <p
                     className="me-1 my-0 text-secondary"
