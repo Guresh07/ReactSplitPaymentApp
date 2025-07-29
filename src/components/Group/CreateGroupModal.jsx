@@ -11,6 +11,7 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
   const [members, setMembers] = useState([
     { name: "", email: "" },
     { name: "", email: "" },
+    { name: "", email: "" },
   ]);
 
   const handleAddMember = () => {
@@ -45,7 +46,7 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
 
     // 🔍 Check if currentUser exists in the group
     const userInGroup = newGroup.groupMembers.some(
-      (m) => m.name === currentUser?.user?.username
+      (m) => m.name === currentUser?.userData?.userName
     );
 
     if (!userInGroup) {
@@ -70,7 +71,7 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
     setCategory("");
     setDescription("");
     setMembers([
-      { name: "", email: "" },
+      { name: currentUser.userData.userName, email: currentUser.userData.email },
       { name: "", email: "" },
       { name: "", email: "" },
     ]);
@@ -83,8 +84,8 @@ function CreateGroupModal({ onCreateGroup, fetchGroups, onCreateGroupFooter }) {
     if (currentUser) {
       const updatedMembers = [...members];
       updatedMembers[0] = {
-        name: currentUser.user.username || "",
-        email: currentUser.user.email || "",
+        name: currentUser.userData.userName || "",
+        email: currentUser.userData.email || "",
       };
       setMembers(updatedMembers);
     }

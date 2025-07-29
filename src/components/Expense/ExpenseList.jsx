@@ -27,12 +27,12 @@ const ExpenseList = ({ expenses }) => {
                       hour: '2-digit',
                       minute: '2-digit',
                       hour12: true
-                    })} . paid by {expense.paidBy} . {expense.splitType} split
+                    })} <span className='text-danger'>paid by {expense.paidBy}</span>  . {expense.splitType} split
                   </p>
                 </div>
                 <div>
                   <p className="m-0 fw-bold">
-                    ${expense.amount}
+                    ₹{expense.amount}
                   </p>
                 </div>
               </div>

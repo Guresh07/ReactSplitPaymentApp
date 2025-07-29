@@ -1,21 +1,38 @@
+import { auth } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Auth } from "../Apis/Api";
 
 const Login = () => {
   const [username, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setemail] = useState("");
+  const [message, setMessage] = useState("");
+  
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+
+    // try {
+    //   const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    //   const user = userCredential.user;
+
+    //   setMessage(`Welcome, ${user.displayName || user.email}`);
+    //   console.log("Logged in user:", user);
+    // } catch (error) {
+    //   setMessage("Login failed: " + error.message);
+    // }
+
     try {
-      const res = await fetch("http://10.196.53.60:8000/login/", {
+      const res = await fetch(`${Auth}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (res.ok) {
@@ -43,14 +60,14 @@ const Login = () => {
           <h2 className="mb-4">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label className="form-label">Name</label>
+              <label className="form-label">Email</label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 required
-                value={username}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your Name"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                placeholder="Your email"
               />
             </div>
 

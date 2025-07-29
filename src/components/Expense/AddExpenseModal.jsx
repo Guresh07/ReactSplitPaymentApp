@@ -6,10 +6,35 @@ function AddExpenseModal({ onAddExpense, membersData }) {
   const [paidBy, setPaidBy] = useState("");
   const [category, setCategory] = useState("🍽️ Food");
   const [splitType, setSplitType] = useState("Equal");
+  const [customSplits, setCustomSplits] = useState({});
+
+  const handleSplitChange = (name, value) => {
+    setCustomSplits((prev) => ({
+      ...prev,
+      [name]: parseFloat(value) || 0,
+    }));
+  };
 
   const handleAddExpense = (e) => {
     e.preventDefault();
-    
+
+    if (!paidBy || paidBy === "Select Person") {
+      alert("Please select who paid the expense.");
+      return;
+    }
+
+    if (!amount || parseFloat(amount) <= 0) {
+      alert("Please enter a valid amount.");
+      return;
+    }
+
+    if (splitType === "Custom") {
+      const totalSplit = Object.values(customSplits).reduce((sum, val) => sum + val, 0);
+      if (totalSplit !== parseFloat(amount)) {
+        alert(`Custom splits total ₹${totalSplit} must equal expense amount ₹${amount}`);
+        return;
+      }
+    }
 
     const newExpense = {
       description,
@@ -17,6 +42,7 @@ function AddExpenseModal({ onAddExpense, membersData }) {
       paidBy,
       category,
       splitType,
+      splits: splitType === "Custom" ? customSplits : null,
     };
 
     onAddExpense(newExpense);
@@ -24,11 +50,10 @@ function AddExpenseModal({ onAddExpense, membersData }) {
     // Reset form
     setDescription("");
     setAmount("");
-    setPaidBy();
+    setPaidBy("");
     setCategory("🍽️ Food");
     setSplitType("Equal");
-
-
+    setCustomSplits({});
   };
 
   return (
@@ -42,15 +67,12 @@ function AddExpenseModal({ onAddExpense, membersData }) {
             </div>
 
             <div className="modal-body">
-              {/* Description */}
               <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Expense description" className="form-control mb-2" required />
 
-              {/* Amount */}
-              <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount" className="form-control mb-2" required />
+              <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="₹ 0.00" className="form-control mb-2" required />
 
-              {/* Paid By */}
               <select value={paidBy} onChange={(e) => setPaidBy(e.target.value)} className="form-select mb-2">
-                <option>Select Person</option>
+                <option value="">Select Person</option>
                 {membersData.map((member) => (
                   <option key={member.memberId} value={member.name}>
                     {member.name}
@@ -58,7 +80,6 @@ function AddExpenseModal({ onAddExpense, membersData }) {
                 ))}
               </select>
 
-              {/* Category */}
               <select value={category} onChange={(e) => setCategory(e.target.value)} className="form-select mb-2">
                 <option>🍽️ Food</option>
                 <option>🎬 Entertainment</option>
@@ -66,15 +87,35 @@ function AddExpenseModal({ onAddExpense, membersData }) {
                 <option>🏠 Rent</option>
               </select>
 
-              {/* Split Type */}
-              <select value={splitType} onChange={(e) => setSplitType(e.target.value)} className="form-select">
+              <select value={splitType} onChange={(e) => setSplitType(e.target.value)} className="form-select mb-3">
                 <option>Equal</option>
                 <option>Custom</option>
               </select>
+
+              {splitType === "Custom" && (
+                <div className="mb-2">
+                  <h6>Custom Splits:</h6>
+                  {membersData.map((member) => (
+                    <div key={member.memberId} className="d-flex align-items-center mb-1">
+                      <label className="me-2 col-4">{member.name}</label>
+                      <input
+                        // type="number"
+                        className="form-control"
+                        value={customSplits[member.name] ?? 0}
+                        onChange={(e) => handleSplitChange(member.name, e.target.value)}
+                        placeholder="₹ 0.00"
+                        required
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add Expense</button>
+              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                Add Expense
+              </button>
             </div>
           </form>
         </div>

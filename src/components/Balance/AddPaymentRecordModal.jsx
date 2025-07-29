@@ -73,7 +73,7 @@ function AddPaymentRecordModal({ onAddPayment, members, currentUser, selectedPay
                     members
                       .filter((member) => member.name !== currentUser)
                       .map((member) => (
-                        <option key={member.memberId} value={member.name}>
+                        <option className='border-5' key={member.memberId} value={member.name}>
                           {member.name}
                         </option>
                       ))

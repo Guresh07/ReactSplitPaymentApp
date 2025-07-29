@@ -1,30 +1,39 @@
-export const updateSplitAmounts = (members, paidAmount, paidByName, currentUserName) => {
+export const updateSplitAmounts = (members, paidAmount, paidByName, currentUserName, splitType, splits) => {
   const totalMembers = members.length;
   const splitAmount = Math.floor(paidAmount / totalMembers)
   const totalBaseSplit = splitAmount * totalMembers;
   const remainder = Math.round(paidAmount - totalBaseSplit)
 
+  if (splitType === "Equal") {
+    members.forEach((member) => {
+      if (member.name === paidByName && member.name != currentUserName) {
 
-  members.forEach((member) => {
+        member.balanceAmount = member.balanceAmount - splitAmount;
+      } else {
+        if (paidByName === currentUserName) {
 
-    if (paidByName === currentUserName) {
+          member.balanceAmount = member.balanceAmount + splitAmount;
 
-      member.balanceAmount = member.balanceAmount + splitAmount;
+        }
+      }
 
+    });
+
+    const payer = members.find(m => m.name === paidByName);
+    if (payer) {
+      payer.balanceAmount += remainder;
     }
-
-
-    if (member.name === paidByName && member.name != currentUserName) {
-
-      member.balanceAmount = member.balanceAmount - splitAmount;
-    }
-
-  });
-
-  const payer = members.find(m => m.name === paidByName);
-  if (payer) {
-    payer.balanceAmount += remainder;
+  } else if (splitType === "Custom") {
+    members.forEach((member) => {
+      if (paidByName === currentUserName) {
+        member.balanceAmount += splits[member.name] || 0;
+      }
+      if (paidByName != currentUserName && member.name === paidByName) {
+        member.balanceAmount -= splits[currentUserName]
+      }
+    })
   }
+
 
   return members;
 };

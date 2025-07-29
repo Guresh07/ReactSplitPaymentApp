@@ -8,11 +8,11 @@ function GroupList({ groups, onDeleteGroup, currentUser }) {
     <div className="myGroups">
 
 
-      <div className="groupTitle d-flex justify-content-between align-items-center pt-3 px-4">
-        <h4 className="fw-bold fs-5 m-0">MY GROUPS</h4>
+      <div className="groupTitle d-flex flex-wrap justify-content-sm-between justify-content-center align-items-center pt-3 px-4">
+        <h4 className="fw-bold fs-5 mb-2 m-sm-0 mb-sm-0">MY GROUPS</h4>
         <button
           type="button"
-          className="fw-medium btn btn-primary"
+          className="fw-medium btn btn-primary mx-5 mx-sm-0"
           data-bs-toggle="modal"
           data-bs-target="#createGroupModal"
           style={{ fontSize: "0.8rem" }}

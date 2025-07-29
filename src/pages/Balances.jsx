@@ -72,35 +72,46 @@ const Balances = () => {
     setSelectedAmount(Math.abs(amount));  // pass absolute amount
   };
 
+
   useEffect(() => {
     fetchGroup();
   }, [groupId]);
+  console.log(group)
 
-
+  if (loading) return <div className="text-center mt-5 vh-100 d-flex align-items-center justify-content-center"><div className="spinner-border text-primary" role="status"></div></div>;
+  
   return (
-    <div className="container position-relative">
-      <Header />
 
-      <div
-        className="px-4 py-3 rounded"
-        style={{ backgroundColor: "#f0f8ff", marginBottom: "100px" }}
-      >
-        {/* Balance Overview Title */}
-        <div className="balanceOverviewTitle">
-          <h4 className="fw-bold fs-5 px-0">Balance Overview</h4>
+    <>
+        <div className="container position-relative">
+          <Header />
+
+          <div
+            className="px-4 py-3 rounded"
+            style={{ backgroundColor: "#f0f8ff", marginBottom: "100px" }}
+          >
+
+            {/* Balance Overview Title */}
+            <div className="balanceOverviewTitle">
+              <h4 className="fw-bold fs-5 px-0">Balance Overview</h4>
+            </div>
+
+            <BalanceSummary members={members} currentUser={currentUser.userData.userName} />
+
+            <AddPaymentRecordModal onAddPayment={addPayment} members={members} currentUser={currentUser.userData.userName} selectedPayee={selectedPayee} selectedAmount={selectedAmount} />
+
+            <MembersBalanceDetails members={members} currentUser={currentUser.userData.userName} onPayClick={handlePayClick} />
+
+
+            <BalanceList payments={Balances} groupName={group.groupName} />
+
+
+          </div>
+
+          <Footer />
         </div>
-
-        <BalanceSummary members={members} currentUser={currentUser.user.username} />
-
-        <AddPaymentRecordModal onAddPayment={addPayment} members={members} currentUser={currentUser.user.username} selectedPayee={selectedPayee} selectedAmount={selectedAmount}/>
-
-        <MembersBalanceDetails members={members} currentUser={currentUser.user.username} onPayClick={handlePayClick}/>
-
-        <BalanceList payments={Balances} />
-      </div>
-
-      <Footer />
-    </div>
+    </>
+    
   );
 };
 

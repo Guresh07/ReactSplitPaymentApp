@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BalanceList = ({ payments }) => {
+const BalanceList = ({ payments, groupName }) => {
   console.log(payments)
 
   return (
@@ -31,7 +31,7 @@ const BalanceList = ({ payments }) => {
                       </span>
                       <div className="d-flex flex-column justify-content-center">
                         <p className="m-0 fw-medium" style={{ fontSize: "0.9rem" }}>
-                          {payment.from} paid {payment.to}
+                          {payment.from} paid to {payment.to}
                         </p>
                         <p className="m-0 fw-semibold text-secondary" style={{ fontSize: "0.8rem" }}>
                           {new Date(payment.date).toLocaleDateString('en-US', {
@@ -41,9 +41,9 @@ const BalanceList = ({ payments }) => {
                             hour: '2-digit',
                             minute: '2-digit',
                             hour12: true
-                          })}. with GroupName
+                          })} . with {groupName}
                         </p>
-                        <p className="m-0 fw-semibold text-secondary" style={{ fontSize: "0.8rem" }}>{payment.note ? ` • ${payment.note}` : ""}</p>
+                        <p className="m-0 fw-semibold text-secondary" style={{ fontSize: "0.8rem" }}>{payment.note ? `Note:- ${payment.note}` : ""}</p>
                       </div>
                     </div>
                     <div>

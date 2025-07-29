@@ -22,7 +22,7 @@ function RecentActivity({ groups }) {
   const activities = [
     ...groups.map(group => ({
       type: 'group',
-      date: group.date, // fallback if missing
+      date: new Date(group.date).getTime(), // fallback if missing
       data: group,
     })),
     ...expenses.map(expense => ({
@@ -42,6 +42,8 @@ function RecentActivity({ groups }) {
 
   // Take latest 5
   const latestActivities = activities.slice(0, 10);
+
+  console.log(activities)
 
   // Find group name by groupId helper (for payment activity)
 const getGroupName = (paymentId) => {

@@ -43,17 +43,17 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                   </div>
 
                   <div className="amountGot d-flex align-items-center justify-content-end flex-wrap column-gap-2">
-                    {member.balanceAmount == 0 && 100 > 0 && member.name != currentUser
-                      ? <p className="m-0 fw-semibold  px-2 py-1 rounded-pill" style={{ backgroundColor: "rgb(201 255 211)", fontSize: "0.8rem", color: "darkgreen" }}><span>settled up</span></p>
+                    {member.balanceAmount == 0 && member.name != currentUser
+                      ? <p className="m-0 fw-semibold  px-2 py-1 rounded-pill" style={{ backgroundColor: "rgb(201 255 211)", fontSize: "clamp(0.6rem, 1vw + 0.5rem, 0.8rem)", color: "darkgreen" }}><span>settled up</span></p>
                       : <p
                         className={`m-0 fw-medium ${member.balanceAmount < 0 ? 'text-danger' : 'text-success'
                           }`}
-                        style={{ fontSize: "0.8rem" }}
+                        style={{ fontSize: "clamp(0.8rem, 1vw + 0.5rem, 0.9rem)" }}
                       >
                         {member.name == currentUser ? "" :
                           member.balanceAmount < 0
-                            ? `You owe ₹${member.balanceAmount}`
-                            : `Owes you ₹${member.balanceAmount}`}
+                            ? `You owe -₹${Math.abs(member.balanceAmount)}`
+                            : `Owes you ₹${Math.abs(member.balanceAmount)}`}
                       </p>
                     }
 
@@ -61,7 +61,7 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                       member.balanceAmount < 0 ? (
                         <span
                           className="btn btn-primary fw-medium m-0 px-3"
-                          style={{ fontSize: "0.8rem" }}
+                          style={{ fontSize: "clamp(0.6rem, 1vw + 0.5rem, 0.8rem)" }}
                           data-bs-toggle="modal"
                           data-bs-target="#recordPaymentModal"
                           onClick={() => onPayClick(member.name, member.balanceAmount)}

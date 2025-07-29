@@ -19,19 +19,19 @@ const BalanceSummary = ({ members = [], currentUser }) => {
             {[
               {
                 title: "Total you are owed",
-                value: "$"+totalOwesMe || "$395",
+                value: totalOwesMe >= 0 ? "₹"+totalOwesMe : "-₹"+Math.abs(totalOwesMe),
                 bg: "#eefde8",
                 color: "green",
               },
               {
                 title: "Total you owe",
-                value: "$"+totalMeOwes,
+                value: "-₹"+Math.abs(totalMeOwes),
                 bg: "#fce9ed",
                 color: "red",
               },
               {
                 title: "Net balance",
-                value: "$"+(totalOwesMe + totalMeOwes)||"$200",
+                value: (totalOwesMe + totalMeOwes) >= 0 ? "₹"+(totalOwesMe + totalMeOwes) : "-₹"+Math.abs((totalOwesMe + totalMeOwes)),
                 bg: "#eefde8",
                 color: "green",
               },

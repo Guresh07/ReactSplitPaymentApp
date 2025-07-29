@@ -33,7 +33,8 @@ const ExpensesSummary = ({expensesTotal, totalMembers, totalBalance}) => {
                                         className="m-0 fw-bold"
                                         style={{ color: item.color || "inherit" }}
                                     >
-                                        ${item.value}
+                                        {item.title !== "Members" ? `${item.value >= 0 ? "₹"+item.value : "-₹"+Math.abs(item.value) }` : `${item.value}`}
+                                        
                                     </p>
                                 </div>
                             </div>

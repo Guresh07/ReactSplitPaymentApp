@@ -23,9 +23,10 @@ function Header() {
                     </div>
                     {/* <button className="btn btn-primary" onClick={handleLogout}>Logout</button> */}
                     <div className="userIconContainer d-flex justify-content-center align-items-center rounded-circle p-3"
-                        style={{ "backgroundColor": "rgb(219 220 244)" }}
+                        style={{ "backgroundColor": "rgb(219 220 244)",cursor: "pointer" }}
                         data-bs-toggle="modal"
                         data-bs-target="#profileModal"
+                        title='UserProfile'
                     >
                         <i className="fa-solid fa-user" style={{ "color": "#0049c7" }}></i>
                     </div>
@@ -42,8 +43,8 @@ function Header() {
                                 <div className="modal-body">
                                     {currentUser ? (
                                         <>
-                                            <p><strong>Username:</strong> {currentUser.user.username}</p>
-                                            <p><strong>Email:</strong> {currentUser.user.email}</p>
+                                            <p><strong>Username:</strong> {currentUser.userData.userName}</p>
+                                            <p><strong>Email:</strong> {currentUser.userData.email}</p>
                                             <button
                                                 className="btn btn-danger w-100"
                                                 onClick={handleLogout}
