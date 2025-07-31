@@ -91,6 +91,25 @@ body.theme-dark .bi-arrow-left{
   color: #f1f1f1 !important;
   
 }
+body.theme-dark .eye:hover{
+  /* background-color: white; */
+  color: #0f0f0f !important;
+  
+}
+body.theme-dark .eye{
+  color: #0f0f0f !important;
+  outline: none;
+  
+}
+body.theme-light .eye{
+  /* color: #0f0f0f !important; */
+  background-color: #b7cceb !important;
+  
+}
+
+button .btn:active {
+    border-color: none;
+}
 
 
 /* Header */

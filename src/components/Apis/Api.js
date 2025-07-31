@@ -1,8 +1,13 @@
 // authentication
 
-export const Auth = `http://10.196.53.55:3000/auth`
+// export const Auth = `http://10.196.53.55:3000/auth` //mine
 // export const Auth = `http://10.196.53.90:3030/auth` //lokesh
+export const Auth = `http://10.196.53.55:3000/auth` //nitheesh
 
+
+
+// http://10.196.53.55:3000/group/add-expenses/id(put)
+// http://10.196.53.55:3000/group/create-group(post)
 
 
 // get groups

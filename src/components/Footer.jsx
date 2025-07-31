@@ -26,7 +26,7 @@ function Footer({ onCreateGroupFooter }) {
                 <p className="m-0 fw-light fs-6">Groups</p>
               </Link>
             </div>
-            {(
+            {location.pathname === "/" && (
               <div className="iconContainer">
                 <Link
                   to=""

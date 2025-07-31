@@ -9,7 +9,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setemail] = useState("");
   const [message, setMessage] = useState("");
-  
+  const [showPassword, setShowPassword] = useState(false);
+
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -73,14 +75,23 @@ const Login = () => {
 
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-              />
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-control"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  className="btn eye border-0 bg-white"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+                </button>
+              </div>
             </div>
 
             <button type="submit" className="btn btn-primary">Login</button>
