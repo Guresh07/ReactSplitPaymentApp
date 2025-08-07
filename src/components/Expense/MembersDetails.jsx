@@ -34,9 +34,9 @@ const MembersDetails = ({ membersData, currentUser, expensesTotal, onAddNewPerso
   return (
     <div className="membersData px-sm-3">
       {membersData.map((member, idx) => (
-        <React.Fragment key={member.memberId || idx}>
-          <div className="member d-flex flex-wrap align-items-center justify-content-sm-between justify-content-center">
-            <div className="d-flex align-items-center justify-content-start mx-2 mx-sm-0">
+        <>
+          <div className="member d-flex flex-wrap gap-2 align-items-center justify-content-sm-between justify-content-center">
+            <div className="d-flex align-items-center justify-content-start me-auto mx-sm-0">
               <p
                 className="fw-medium px-3 py-2 me-2 rounded-circle m-0"
                 style={{ backgroundColor: "#e5e5ff" }}
@@ -66,7 +66,7 @@ const MembersDetails = ({ membersData, currentUser, expensesTotal, onAddNewPerso
             </div>
           </div>
           <hr />
-        </React.Fragment>
+        </>
       ))}
 
       <div className="modal fade" id="addMemberModal" tabIndex="-1">

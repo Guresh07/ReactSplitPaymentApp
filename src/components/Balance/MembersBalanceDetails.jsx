@@ -49,9 +49,9 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
           {/* Members List */}
           <div className="membersList px-sm-3">
             {members.map((member) => (
-              <React.Fragment key={member.memberId}>
-                <div className="member d-flex flex-wrap align-items-center justify-content-sm-between justify-content-center">
-                  <div className="memberName d-flex align-items-center justify-content-start mx-2 mx-sm-0">
+              <>
+                <div className="member d-flex flex-wrap gap-2 align-items-center justify-content-sm-between justify-content-center">
+                  <div className="memberName d-flex align-items-center justify-content-start me-auto mx-sm-0">
                     <p
                       className="fw-medium px-3 py-2 me-2 rounded-circle m-0"
                       style={{ backgroundColor: "#e5e5ff" }}
@@ -91,18 +91,14 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                         </span>
                       ) : member.balanceAmount == 0 ? "" : (
                         <i
-                          className={`fa-solid fa-bell text-primary ${reminderSent[member.email] ? 'opacity-50' : ''}`}
-                          style={{
-                            cursor: reminderSent[member.email] ? 'not-allowed' : 'pointer',
-                            pointerEvents: reminderSent[member.email] ? 'none' : 'auto'
-                          }}
-                          onClick={() => handleReminderClick(member.email)}
-                        ></i>
-                      )}
+                          className="fa-solid fa-bell text-primary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => toast.info(`Reminder sent to ${member.email}`)}
+                        ></i>)}
                   </div>
                 </div>
                 <hr />
-              </React.Fragment>
+              </>
             ))}
           </div>
         </div>
