@@ -208,7 +208,7 @@ const Expenses = () => {
             </h4>
             <button
               type="button"
-              className="btn btn-sm btn-outline-primary fw-medium ms-2"
+              className="btn btn-sm btn-outline-primary ms-auto fw-medium ms-2"
               style={{ fontSize: "0.8rem" }}
               data-bs-toggle="modal"
               data-bs-target="#addMemberModal"
@@ -228,7 +228,7 @@ const Expenses = () => {
             <AddExpenseModal onAddExpense={addExpense} groupId={groupId} membersData={members} />
             <button
               type="button"
-              className="btn btn-primary fw-medium ms-2 mb-sm-0"
+              className="btn btn-primary fw-medium ms-auto mb-sm-0"
               style={{ fontSize: "0.8rem" }}
               data-bs-toggle="modal"
               data-bs-target="#addExpenseModal"
