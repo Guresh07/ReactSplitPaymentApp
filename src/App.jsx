@@ -19,7 +19,7 @@ function App() {
   return (
     <>
     <BrowserRouter basename="/ReactSplitPaymentApp">
-      <Router>
+      
 
         <Routes>
           <Route path="/signup" element={<Signup />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path="/expenses/:groupId" element={<ProtectedRoute><Expenses /></ProtectedRoute>} />
           <Route path="/balances/:groupId" element={<ProtectedRoute><Balances /></ProtectedRoute>} />
         </Routes>
-      </Router>
+      
     </BrowserRouter>
 
       <ToastContainer
