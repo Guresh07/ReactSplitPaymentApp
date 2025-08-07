@@ -1,8 +1,8 @@
 // authentication
 
 // export const Auth = `http://10.196.53.55:3000/auth` //mine
-// export const Auth = `http://10.196.53.90:3030/auth` //lokesh
-export const Auth = `http://10.196.53.55:3000/auth` //nitheesh
+export const Auth = `http://10.196.53.90:3030/auth` //lokesh
+// export const Auth = `http://10.196.53.55:3000/auth` //nitheesh
 
 
 
@@ -29,9 +29,7 @@ export const addGroup = `https://6866093989803950dbb10192.mockapi.io/api/groups`
 // updateGroup
 
 export const updategroup = `https://6866093989803950dbb10192.mockapi.io/api/groups`
-
-
-// export const addexpense = `http://10.196.53.90:3030/groups` //lokesh
+// export const updategroup = `http://10.196.53.90:3030/groups` //lokesh
 // delete group
 
 export const deleteGroup = `https://6866093989803950dbb10192.mockapi.io/api/groups`

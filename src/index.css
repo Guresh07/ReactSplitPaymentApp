@@ -101,6 +101,11 @@ body.theme-dark .eye{
   outline: none;
   
 }
+body.theme-dark .btn-close{
+  /* color: white !important; */
+  background-color: white;
+  
+}
 body.theme-light .eye{
   /* color: #0f0f0f !important; */
   background-color: #b7cceb !important;

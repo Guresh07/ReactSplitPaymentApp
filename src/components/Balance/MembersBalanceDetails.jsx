@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
 const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
+
+  const [reminderSent, setReminderSent] = useState({});
+
+  const handleReminderClick = (email) => {
+
+    toast.info(`Reminder sent to ${email}`);
+
+    setReminderSent(prev => ({ ...prev, [email]: true }));
+
+    setTimeout(() => {
+      setReminderSent(prev => {
+        const updated = { ...prev };
+        delete updated[email];
+        return updated;
+      });
+    }, 5000);
+  };
+
+
   return (
     <>
       <div>
@@ -72,10 +91,14 @@ const MembersBalanceDetails = ({ members = [], currentUser, onPayClick }) => {
                         </span>
                       ) : member.balanceAmount == 0 ? "" : (
                         <i
-                          className="fa-solid fa-bell text-primary"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => toast.info(`Reminder sent to ${member.email}`)}
-                        ></i>)}
+                          className={`fa-solid fa-bell text-primary ${reminderSent[member.email] ? 'opacity-50' : ''}`}
+                          style={{
+                            cursor: reminderSent[member.email] ? 'not-allowed' : 'pointer',
+                            pointerEvents: reminderSent[member.email] ? 'none' : 'auto'
+                          }}
+                          onClick={() => handleReminderClick(member.email)}
+                        ></i>
+                      )}
                   </div>
                 </div>
                 <hr />
