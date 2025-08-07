@@ -6,6 +6,7 @@ import Signup from "./components/Auth/signUp";
 import Login from "./components/Auth/login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect } from "react";
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import { useTheme } from './context/ThemeContext';
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+    <BrowserRouter basename="/ReactSplitPaymentApp">
       <Router>
 
         <Routes>
@@ -27,6 +29,7 @@ function App() {
           <Route path="/balances/:groupId" element={<ProtectedRoute><Balances /></ProtectedRoute>} />
         </Routes>
       </Router>
+    </BrowserRouter>
 
       <ToastContainer
         position="top-center"
