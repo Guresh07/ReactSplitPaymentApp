@@ -12,7 +12,7 @@ function GroupList({ groups, onDeleteGroup, currentUser }) {
         <h4 className="fw-bold fs-5 mb-2 m-sm-0 mb-sm-0">MY GROUPS</h4>
         <button
           type="button"
-          className="fw-medium btn btn-primary mx-5 mx-sm-0"
+          className="fw-medium btn btn-primary ms-auto mx-sm-0"
           data-bs-toggle="modal"
           data-bs-target="#createGroupModal"
           style={{ fontSize: "0.8rem" }}
