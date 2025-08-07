@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Router, Routes, Route } from "react-router-dom";
 import Groups from "./pages/Groups"
 import Expenses from "./pages/Expenses";
 import Balances from "./pages/Balances";
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-    <BrowserRouter basename="/ReactSplitPaymentApp">
+
       <Router>
 
         <Routes>
@@ -28,7 +28,6 @@ function App() {
           <Route path="/balances/:groupId" element={<ProtectedRoute><Balances /></ProtectedRoute>} />
         </Routes>
       </Router>
-    </BrowserRouter>
 
       <ToastContainer
         position="top-center"
