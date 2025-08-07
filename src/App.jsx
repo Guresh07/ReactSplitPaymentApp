@@ -17,6 +17,7 @@ function App() {
 
   return (
     <>
+    <BrowserRouter basename="/ReactSplitPaymentApp">
       <Router>
 
         <Routes>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/balances/:groupId" element={<ProtectedRoute><Balances /></ProtectedRoute>} />
         </Routes>
       </Router>
+    </BrowserRouter>
 
       <ToastContainer
         position="top-center"
